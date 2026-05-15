@@ -83,7 +83,19 @@ template <class T> void dll_t::extract_all (const &T dato){
                 tail_ = n->get_prev();
             }
         } else{
-            
-        }
+            nodo = get_next();
+        } 
+
     }
+}
+
+
+template <class T> void dll_t<T>::concat(dll_t<T>& l2){
+    // Obtengo el final de una lista
+    dll_node_t<T>* finalLista = get_tail();
+    // Obtengo inicio cola de listaDoce
+    // dll_node_t<T>* inicioDoce = get_head(12);
+    // Ahora conecto el final con el inicio 
+    finalLista->get_next = set_next(12->get_head) // set_next(inicioDoce)
+    
 }
