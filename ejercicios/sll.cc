@@ -27,31 +27,16 @@ Fase 2: Aislar nodos y reconectarlos sin perder nada por el camino
 // Ayuda de lógica, crear un nodo auxiliar antes de depurar nada.
 
 // SEGUNDA IDEA - menos punteros (mejor solución desde mi punto de vista)
-template <class T> sll_node_t<T>* sll_t::removeduplicates(){
-    sll_node_t<T>* nodo_inicial = get_head();
-    // Recorrer la lista enlazada. Existe lista y no se ha acabado.
-    while (nodo_inicial != nullptr && nodo_inicial->get_next() != nullptr){
-        if (nodo_inicial->get_data() == nodo_inicial->get_next()->get_data()){
-            // Si estoy en la primera posición  
-            if (nodo_inicial->get_prev() == nullptr){
-                // Muevo el cabezal de head una posición hacía delante
-                // crear un puntero auxiliar
-                // establecer el nuevo get_prev == nullptr
-                // eliminar el otro
-                sll_node_t<T>* auxiliar = nodo_inicial;
-                nodo_inicial->get_next() = head_;
-                nodo_inicial->get_next() = set_prev(nullptr);
-                // hacemos rm
-                remove auxiliar;                
-            }
-        // Resto de casos
-            sll_node_t<T>* auxiliar = nodo_inicial;
-            nodo_inicial->get_next() = set_prev(nodo_inicial->get_prev());
-            // ejecutamos el remove
-            remove auxiliar;
+template <class T> void sll_t<T>::remove_duplicates()
+    // establecemos el puntero en la primera posición.
+    sll_node_t<T>* nodo = get_head();
+    while (nodo != nullptr){
+        if(nodo->get_data() == nodo->get_next()->get_data()){
+            sll_node_t<T>* auxiliar = nodo->get_next();
+            nodo->set_next(auxiliar->get_next());
+            delete auxiliar;
+} else {
+            // Solo avanzamos si no eran iguales
+            nodo = nodo->get_next();
+        }
     }
-    // Incrementamos el iterador 
-    nodo_inicial = nodo_inicial->get_next();
-    }
-}
-
