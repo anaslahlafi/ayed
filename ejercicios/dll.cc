@@ -104,24 +104,15 @@ void dll_t<T>::move_to_front(dll_node_t<T>* nodo) {
 
 
 
+// Fase 2: Dado un puntero a un nodo específico que ya pertenece a la lista doblemente enlazada
 /*
-¡Claro que sí! Para consolidar esta "Fase 2" (Cirugía Local) necesitamos ejercicios que no cambien toda la lista de golpe, pero que te obliguen a hacer conexiones de punteros muy precisas en medio de la estructura sin perder referencias.
-
-Aquí tienes dos retos nuevos de nivel examen, uno para cada tipo de lista. Coge papel y boli para dibujar las cajas antes de picar el código.
-
-### Reto 1 (SLL): Insertar *antes* de un objetivo (`insert_before_value`)
-
-* **Enunciado:** Implementa un método `void insert_before_value(const T& target, const T& new_data)`. Este método debe buscar la **primera aparición** del valor `target` en la lista simplemente enlazada, e insertar un nuevo nodo con el valor `new_data` exactamente en la posición anterior a él. Si el `target` no existe en la lista, no se hace nada.
-* **El Peligro (Riesgo de Segfault):** Al estar en una SLL (Lista Simplemente Enlazada), no tienes el método `get_prev()`. Si tu bucle avanza hasta pararse exactamente encima del nodo que contiene el `target`, ¡ya es demasiado tarde! No tendrás forma de enganchar el nuevo nodo por detrás porque habrás perdido la referencia al nodo anterior.
-* **La Pista Quirúrgica:** 1. Tienes que evaluar siempre el `get_next()->get_data()`. Es decir, debes ir mirando "una baldosa por delante" de donde estás pisando.
-2. ¡Cuidado con el caso especial! ¿Qué pasa si el `target` resulta ser exactamente la cabeza de la lista? Tendrás que insertar el nuevo nodo actualizando el puntero `head_` de la clase.
-
-### Reto 2 (DLL): Intercambio de vecinos (`swap_with_next`)
-
-* **Enunciado:** Dado un puntero a un nodo específico de la lista doblemente enlazada, implementa el método `void swap_with_next(dll_node_t<T>* nodo)`. Debes intercambiar físicamente de posición ese nodo con su vecino de la derecha, modificando únicamente las conexiones de los punteros (está estrictamente prohibido usar el método `set_data()` para intercambiar los valores internos).
-* **El Peligro (Riesgo de Segfault):** Este es el ejercicio definitivo de precisión. Si te equivocas en el orden en el que reasignas las flechas, desconectarás la lista en dos partes o harás que un nodo apunte hacia sí mismo en bucle infinito.
-* **La Pista Quirúrgica:**
-1. Para hacer esto con seguridad matemática, intervienen hasta **4 nodos**: el vecino izquierdo del nodo, el nodo mismo, el vecino derecho del nodo, y el vecino que está a la derecha del vecino derecho.
-2. Como siempre en una DLL, vigila los extremos. Si el `nodo` que te pasan es la cola (`tail_`), no tiene vecino derecho con el que intercambiarse (la función debería terminar sin hacer nada). Si el `nodo` es la cabeza, al intercambiarlo con el segundo, el segundo pasará a ser la nueva cabeza y deberás actualizar `head_`.
-3. Te recomiendo crear un puntero auxiliar `dll_node_t<T>* vecino = nodo->get_next();` para que la lectura de tu código sea mucho más clara antes de empezar a cruzar las flechas.
+Dado un puntero a un nodo específico de la lista doblemente enlazada, implementa el método
+void swap_with_next(dll_node_t<T>* nodo). Debes intercambiar físicamente de posición ese nodo
+con su vecino de la derecha, modificando únicamente las conexiones de los punteros
+(está estrictamente prohibido usar el método set_data() para intercambiar los valores internos).
 */
+
+template <class T>
+void dll_t<T>::swap_with_next(dll_node_t<T>* nodo){
+    
+}

@@ -35,8 +35,59 @@ template <class T> void sll_t<T>::remove_duplicates()
             sll_node_t<T>* auxiliar = nodo->get_next();
             nodo->set_next(auxiliar->get_next());
             delete auxiliar;
-} else {
+        } else {
             // Solo avanzamos si no eran iguales
             nodo = nodo->get_next();
         }
+}
+
+
+template <class T>
+void sll_t<T>::insert_before_value(const T& target, const T& new_data){
+    // Nos ponemos en la primera posición de la lista enlazada
+    sll_node_t<T>* nodo = get_head();
+    // Siempre y cuando no este vacía o hayamos terminado de recorrerla
+    while (nodo != nullptr){
+        // Comprobamos el dato
+        if (nodo->get_data() == target){
+            // Aparece
+            sll_node_t<T>* nuevoNodo;
+            nuevoNodo->set_data(new_data);
+            nuevoNodo->set_next(nodo->get_next);
+            nodo->set_next(nuevoNodo);
+            // Buscamos solo la primera aparición
+            break;
+        } else {
+            // En caso de que no coincida el dato con la posición
+            nodo = nodo->get_next();
+        }
     }
+}
+
+template <class T>
+void sll_t<T>::insert_before_value(const T& target, const T& new_data) {
+    sll_node_t<T>* nodo = get_head();
+    
+    // 1. Caso base: Lista vacía
+    if (nodo == nullptr) return; 
+    
+    // 2. Caso límite: El objetivo es la cabeza
+    if (nodo->get_data() == target) {
+        sll_node_t<T>* nuevoNodo = new sll_node_t<T>(new_data);
+        nuevoNodo->set_next(nodo);
+        head_ = nuevoNodo;
+        return; 
+    }
+    
+    // 3. Búsqueda y conexión en el medio/final
+    while (nodo != nullptr && nodo->get_next() != nullptr) {
+        if (nodo->get_next()->get_data() == target) {
+            sll_node_t<T>* nuevoNodo = new sll_node_t<T>(new_data);
+            nuevoNodo->set_next(nodo->get_next());
+            nodo->set_next(nuevoNodo);
+            break; // Aquí sí usamos break porque estamos dentro de un while
+        } else {
+            nodo = nodo->get_next();
+        }
+    }
+}
